@@ -94,6 +94,11 @@ public class DeptDao {
     }
 
 \   public List<Dept> getDept() {
-        
+        //查询数据，返回一个Dept集合;
+        try {
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
 }
 }
