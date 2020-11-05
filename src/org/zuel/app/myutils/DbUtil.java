@@ -34,7 +34,7 @@ public class DbUtil {
         pst.close();
         conn.close();
     }
-    //overload;
+    //overload close method;
     public static void close(PreparedStatement pst,Connection conn) throws SQLException {
         pst.close();
         conn.close();
