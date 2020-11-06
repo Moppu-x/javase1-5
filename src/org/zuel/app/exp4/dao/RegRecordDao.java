@@ -157,7 +157,7 @@ public class RegRecordDao {
     }
 
     //getRegRecord(int id)查询指定挂号记录id的数据;
-    public RegRecord getrRegRecord(int id) {
+    public RegRecord getRegRecord(int id) {
         //查询指定id的挂号记录并返回一个RegRecord对象;
         RegRecord reg = new RegRecord();
         try {
@@ -183,6 +183,40 @@ public class RegRecordDao {
         }
         System.out.println("Query complete.");
         return reg;
+    }
+
+    //getRegRecord(String reg_time)根据时间查询挂号记录;
+    public List<RegRecord> getRegRecord(String reg_time) {
+        //查询指定reg_time的所有挂号记录并返回一个RegRecord集合;
+        List<RegRecord> reglist = new ArrayList<>();
+        RegRecord reg;
+        try {
+            //定义查询语句：
+            final String sql = "SELECT * FROM reg_record WHERE reg_time=?";
+            //创建连接、statement和resultset;
+            Connection conn = DbUtil.getConn();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            //设置preparedstatement参数;
+            pst.setString(1, reg_time);
+            ResultSet rs = pst.executeQuery();
+            //将结果集存放到reglist集合中;
+            while (rs.next()) {
+                reg = new RegRecord();
+                reg.setId(rs.getInt("id"));
+                reg.setPatienttId(rs.getInt("patient_id"));
+                reg.setDeptId(rs.getInt("dept_id"));
+                reg.setRegTime(rs.getString("reg_time"));
+                reg.setPrice(rs.getDouble("price"));
+                reglist.add(reg);
+            }
+            //关闭资源;
+            DbUtil.close(rs, pst, conn);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        }
+        System.out.println("Query complete.");
+        return reglist;
     }
 
     //getPatientRecord(int patient_id)查询指定病人id的挂号记录
