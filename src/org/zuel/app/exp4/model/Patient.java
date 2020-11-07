@@ -61,4 +61,9 @@ public class Patient {
         System.out.println("Inputs for patient done.");
         input.close();
     }
+
+    //重写toString()方法;
+    public String toString() {
+        return "Patient: id: "+id+" name: "+name+" sex: "+sex+" age: "+age;
+    }
 }

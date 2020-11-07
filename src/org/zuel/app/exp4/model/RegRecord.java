@@ -47,18 +47,24 @@ public class RegRecord {
     public void setAll() {
         //获取输入并赋值;
         Scanner input = new Scanner(System.in);
-        System.out.println("Input the attributes of reg record");
+        System.out.println("Input the attributes of registration record");
         System.out.print("id: ");
         setId(input.nextInt());
         System.out.print("patient id: ");
         setPatienttId(input.nextInt());
         System.out.print("department id: ");
         setDeptId(input.nextInt());
-        System.out.print("reg time: ");
+        System.out.print("registration time(format:YYYY-MM-DD HH:MM:SS): ");
         setRegTime(input.nextLine());
         System.out.println("price: ");
         setPrice(input.nextDouble());
-        System.out.println("Inputs for reg record done.");
+        System.out.println("Inputs for registration record done.");
         input.close();
+    }
+
+    //重写toString()方法;
+    public String toString() {
+        return "Registration Record: id: "+id+" patient id: "+patient_id+" department id: "+dept_id
+                +" registration time: "+reg_time+" price: "+price;
     }
 }

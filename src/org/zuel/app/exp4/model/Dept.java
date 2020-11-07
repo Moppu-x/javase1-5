@@ -1,5 +1,7 @@
 package org.zuel.app.exp4.model;
 
+import java.util.Scanner;
+
 public class Dept {
     //科室类;
     //属性；
@@ -34,4 +36,24 @@ public class Dept {
         this.remark = remark;
     }
 
+    //setAll()方法获取输入并赋值给各个属性;
+    public void setAll() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input the attributes of department");
+        System.out.print("id: ");
+        setId(input.nextInt());
+        System.out.print("type: ");
+        setType(input.nextInt());
+        System.out.print("name: ");
+        setName(input.nextLine());
+        System.out.println("password: ");
+        setRemark(input.nextLine());
+        System.out.println("Inputs for department done.");
+        input.close();
+    }
+
+    //重写toString()方法;
+    public String toString() {
+        return "Department: id: "+id+" name: "+name+" type: "+type+" remark: "+remark;
+    }
 }
