@@ -1,5 +1,7 @@
 package org.zuel.app.exp4.model;
 
+import java.util.Scanner;
+
 public class Patient {
     //病人类;
     //属性;
@@ -39,5 +41,24 @@ public class Patient {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    //setAll()方法设置所有属性;
+    public void setAll() {
+        //获取的输入赋值给属性;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input the attributes of patient");
+        System.out.print("id: ");
+        setId(input.nextInt());
+        System.out.print("sex(1 for male,2 for female,0 for unknown): ");
+        setSex(input.nextInt());
+        System.out.print("age: ");
+        setAge(input.nextInt());
+        System.out.print("name: ");
+        setName(input.nextLine());
+        System.out.println("password: ");
+        setPassword(input.nextLine());
+        System.out.println("Inputs for patient done.");
+        input.close();
     }
 }

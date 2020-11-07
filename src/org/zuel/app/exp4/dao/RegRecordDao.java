@@ -42,6 +42,35 @@ public class RegRecordDao {
             e.printStackTrace();
         }
     }
+    public void insertRegRecord(RegRecord reg) {
+        //根据对象插入数据;
+        try {
+            //定义插入数据的sql语句;
+            final String sql = "INSERT INTO reg_record VALUES(?,?,?,?,?)";
+            //创建connection和statement;
+            Connection conn = DbUtil.getConn();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            //设置preparedstatement的参数;
+            pst.setInt(1, reg.getId());
+            pst.setInt(2, reg.getPatientId());
+            pst.setInt(3, reg.getDeptId());
+            pst.setString(4, reg.getRegTime());
+            pst.setDouble(5, reg.getPrice());
+            //执行语句;
+            int rs = pst.executeUpdate();
+            if(rs>0){
+                System.out.println("Insertion complete.");
+            }
+            else{
+                System.out.println("Insertion failed.");
+            }
+            //关闭连接和statement;
+            DbUtil.close(pst, conn);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        }
+    }
 
     //deleteRegRecord()删除数据;
     public void deleteRegRecord(int id) {

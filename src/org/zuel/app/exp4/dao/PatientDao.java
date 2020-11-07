@@ -41,6 +41,35 @@ public class PatientDao {
             e.printStackTrace();
         }
     }
+    public void insertPatient(Patient patient) {
+        //根据对象将记录插入数据表;
+        try {
+            //定义插入数据的sql语句;
+            final String sql = "INSERT INTO patient VALUES(?,?,?,?,?)";
+            //创建connection和statement;
+            Connection conn = DbUtil.getConn();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            //设置preparedstatement的参数;
+            pst.setInt(1, patient.getId());
+            pst.setString(2, patient.getName());
+            pst.setInt(3, patient.getSex());
+            pst.setInt(4, patient.getAge());
+            pst.setString(5, patient.getPassword());
+            //执行语句;
+            int rs = pst.executeUpdate();
+            if(rs>0){
+                System.out.println("Insertion complete.");
+            }
+            else{
+                System.out.println("Insertion failed.");
+            }
+            //关闭连接和statement;
+            DbUtil.close(pst, conn);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        }
+    }
 
     //deletePatient()删除数据;
     public void deletePatient(int id) {

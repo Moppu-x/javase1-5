@@ -1,5 +1,7 @@
 package org.zuel.app.exp4.model;
 
+import java.util.Scanner;
+
 public class RegRecord {
     //挂号记录类;
     //属性;
@@ -39,5 +41,24 @@ public class RegRecord {
     }
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    //setAll()方法设置所有属性;
+    public void setAll() {
+        //获取输入并赋值;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input the attributes of reg record");
+        System.out.print("id: ");
+        setId(input.nextInt());
+        System.out.print("patient id: ");
+        setPatienttId(input.nextInt());
+        System.out.print("department id: ");
+        setDeptId(input.nextInt());
+        System.out.print("reg time: ");
+        setRegTime(input.nextLine());
+        System.out.println("price: ");
+        setPrice(input.nextDouble());
+        System.out.println("Inputs for reg record done.");
+        input.close();
     }
 }
