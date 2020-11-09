@@ -14,10 +14,17 @@ public class RegQuery {
         List<RegRecord> rList = new ArrayList<>();
         //使用Dao查询挂号记录数据;
         RegRecordDao rDao = new RegRecordDao();
+        //查询所有挂号记录并输出;
         rList = rDao.getRegRecord();
         Iterator<RegRecord> iter = rList.iterator();
         while (iter.hasNext()) {
             System.out.println(iter.next().toString());
+        }
+        //查询指定日期的挂号记录并输出;
+        rList = rDao.getRegRecord("2020-11-11");
+        iter = rList.iterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next.toString());
         }
     }
 }
