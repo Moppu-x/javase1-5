@@ -11,7 +11,7 @@ public class DbUtil {
 
     // 驱动、数据库URL、用户名和密码;
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://localhost:3306/hospital";
+    private static String url = "jdbc:mysql://localhost:3306/exp";
     private static String user = "root";
     private static String password = "830930";
 
