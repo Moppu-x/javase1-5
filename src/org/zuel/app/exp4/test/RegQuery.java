@@ -25,13 +25,13 @@ public class RegQuery {
         rList = rDao.getRegRecord("2020-11-11");
         iter = rList.iterator();
         while(iter.hasNext()) {
-            System.out.println(iter.next.toString());
+            System.out.println(iter.next().toString());
         }
         //查询指定病人id的挂号记录并输出;
         rList = rDao.getPatientRecord(3);
-        ListUtil.outputList(rList);
+        
         //查询指定科室id的挂号记录;
         rList = rDao.getDeptRecord(2);
-        ListUtil.outputList(rList);
+        
     }
 }
