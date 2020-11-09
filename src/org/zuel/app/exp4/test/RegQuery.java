@@ -8,6 +8,7 @@ import org.zuel.app.exp4.dao.RegRecordDao;
 import org.zuel.app.exp4.model.RegRecord;
 
 public class RegQuery {
+    //按不同维度条件查询挂号记录;
     public static void main(String[] args) {
         //查询挂号记录并展示;
         //rList用于存放查询结果;
@@ -26,5 +27,11 @@ public class RegQuery {
         while(iter.hasNext()) {
             System.out.println(iter.next.toString());
         }
+        //查询指定病人id的挂号记录并输出;
+        rList = rDao.getPatientRecord(3);
+        ListUtil.outputList(rList);
+        //查询指定科室id的挂号记录;
+        rList = rDao.getDeptRecord(2);
+        ListUtil.outputList(rList);
     }
 }
