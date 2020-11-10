@@ -176,11 +176,11 @@ public class DoctorDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return doctorlist;
     }
 
@@ -205,11 +205,11 @@ public class DoctorDao {
             doctor.setPassword(rs.getString("password"));
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return doctor;
     }
 
@@ -237,11 +237,11 @@ public class DoctorDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return doctorlist;
     }
 }

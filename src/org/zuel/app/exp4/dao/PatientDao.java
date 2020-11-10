@@ -150,11 +150,11 @@ public class PatientDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return patientlist;
     }
 
@@ -179,11 +179,11 @@ public class PatientDao {
             patient.setPassword(rs.getString("password"));
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return patient;
     }
 }

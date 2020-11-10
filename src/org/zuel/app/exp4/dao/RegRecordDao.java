@@ -177,11 +177,11 @@ public class RegRecordDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return reglist;
     }
 
@@ -206,11 +206,11 @@ public class RegRecordDao {
             reg.setPrice(rs.getDouble("price"));
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return reg;
     }
 
@@ -240,11 +240,11 @@ public class RegRecordDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return reglist;
     }
 
@@ -274,11 +274,11 @@ public class RegRecordDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return reglist;
     }
 
@@ -308,11 +308,11 @@ public class RegRecordDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
+            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
-        System.out.println("Query complete.");
         return reglist;
     }
 }
