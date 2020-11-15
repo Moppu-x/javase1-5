@@ -11,6 +11,15 @@ public class Doctor {
     private String name;
     private String password;
 
+    public Doctor() {}
+    public Doctor(int id,String name,int sex,int dept_id,String password) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.dept_id = dept_id;
+        this.password = password;
+    }
+
     //各个属性的getter和setter方法;
     public int getId() {
         return id;

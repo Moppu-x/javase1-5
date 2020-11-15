@@ -10,6 +10,14 @@ public class Dept {
     private String name;
     private String remark;
 
+    public Dept() {}
+    public Dept(int id,String name,int type,String remark) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.remark = remark;
+    }
+
     //各个属性的getter和setter方法;
     public int getId() {
         return id;

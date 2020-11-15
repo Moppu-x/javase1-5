@@ -159,7 +159,9 @@ public class DoctorDao {
         Doctor doctor;
         try {
             //定义查询语句：
-            final String sql = "SELECT * FROM doctor";
+            final String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
+                              +"t.sex as sex,t.password as password FROM doctor t left join dept d "
+                              +"on t.dept_id=d.id";
             //创建连接、statement和resultset;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -190,7 +192,10 @@ public class DoctorDao {
         Doctor doctor = new Doctor();
         try {
             //定义查询语句：
-            final String sql = "SELECT * FROM doctor WHERE id=?";
+            final String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
+                              +"t.sex as sex,t.password as password FROM doctor t left join dept d "
+                              +"on t.dept_id=d.id "
+                              +"WHERE id=?";
             //创建连接、statement和resultset;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -220,7 +225,10 @@ public class DoctorDao {
         Doctor doctor;
         try {
             //定义查询语句：
-            final String sql = "SELECT * FROM doctor WHERE dept_id=?";
+            final String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
+                              +"t.sex as sex,t.password as password FROM doctor t left join dept d "
+                              +"on t.dept_id=d.id "
+                              +"WHERE　dept_id=?";
             //创建连接、statement和resultset;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);

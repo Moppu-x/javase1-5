@@ -11,6 +11,15 @@ public class RegRecord {
     private String reg_time;
     private double price;
 
+    public RegRecord() {}
+    public RegRecord(int id,int patient_id,int dept_id,String reg_time,double price) {
+        this.id = id;
+        this.patient_id = patient_id;
+        this.dept_id = dept_id;
+        this.reg_time = reg_time;
+        this.price = price;
+    }
+
     ////各个属性的getter和setter方法;
     public int getId() {
         return id;
@@ -21,7 +30,7 @@ public class RegRecord {
     public int getPatientId() {
         return patient_id;
     }
-    public void setPatienttId(int patient_id) {
+    public void setPatientId(int patient_id) {
         this.patient_id = patient_id;
     }
     public int getDeptId() {
@@ -51,7 +60,7 @@ public class RegRecord {
         System.out.print("id: ");
         setId(input.nextInt());
         System.out.print("patient id: ");
-        setPatienttId(input.nextInt());
+        setPatientId(input.nextInt());
         System.out.print("department id: ");
         setDeptId(input.nextInt());
         System.out.print("registration time(format:YYYY-MM-DD HH:MM:SS): ");

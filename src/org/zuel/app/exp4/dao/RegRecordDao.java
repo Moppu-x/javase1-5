@@ -153,166 +153,59 @@ public class RegRecordDao {
         }
     }
 
-    //getRegRecord()查询所有挂号记录;
-    public List<RegRecord> getRegRecord() {
-        //查询所有挂号记录并返回一个RegRecord集合;
+    //execute()方法用于执行查询的sql语句;
+    public List<RegRecord> execute(String sql) throws SQLException {
         List<RegRecord> reglist = new ArrayList<>();
         RegRecord reg;
-        try {
-            //定义查询语句：
-            final String sql = "SELECT * FROM reg_record";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到reglist集合中;
-            while (rs.next()) {
-                reg = new RegRecord();
-                reg.setId(rs.getInt("id"));
-                reg.setPatienttId(rs.getInt("patient_id"));
-                reg.setDeptId(rs.getInt("dept_id"));
-                reg.setRegTime(rs.getString("reg_time"));
-                reg.setPrice(rs.getDouble("price"));
-                reglist.add(reg);
-            }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-        return reglist;
-    }
-
-    //getRegRecord(int id)查询指定挂号记录id的数据;
-    public RegRecord getRegRecord(int id) {
-        //查询指定id的挂号记录并返回一个RegRecord对象;
-        RegRecord reg = new RegRecord();
-        try {
-            //定义查询语句：
-            final String sql = "SELECT * FROM reg_record WHERE id=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            //将结果集处理为reg对象;
+        //创建连接、statement和resultset;
+        Connection conn = DbUtil.getConn();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        //将结果集存放到reglist集合中;
+        while (rs.next()) {
+            reg = new RegRecord();
             reg.setId(rs.getInt("id"));
-            reg.setPatienttId(rs.getInt("patient_id"));
+            reg.setPatientId(rs.getInt("patient_id"));
             reg.setDeptId(rs.getInt("dept_id"));
             reg.setRegTime(rs.getString("reg_time"));
             reg.setPrice(rs.getDouble("price"));
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
+            reglist.add(reg);
         }
-        return reg;
+        //关闭资源;
+        DbUtil.close(rs, pst, conn);
+        return reglist;
     }
 
-    //getRegRecord(String reg_time)根据时间查询挂号记录;
-    public List<RegRecord> getRegRecord(String reg_time) {
-        //查询指定reg_time的所有挂号记录并返回一个RegRecord集合;
+    //getRegRecord()查询所有挂号记录;
+    public List<RegRecord> getRegRecord(Integer id,Integer patient_id,Integer dept_id,String reg_time) {
+        //查询所有挂号记录并返回一个RegRecord集合;
         List<RegRecord> reglist = new ArrayList<>();
-        RegRecord reg;
         try {
             //定义查询语句：
-            final String sql = "SELECT * FROM reg_record WHERE reg_time=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement参数;
-            pst.setString(1, reg_time);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到reglist集合中;
-            while (rs.next()) {
-                reg = new RegRecord();
-                reg.setId(rs.getInt("id"));
-                reg.setPatienttId(rs.getInt("patient_id"));
-                reg.setDeptId(rs.getInt("dept_id"));
-                reg.setRegTime(rs.getString("reg_time"));
-                reg.setPrice(rs.getDouble("price"));
-                reglist.add(reg);
+            String sql = "SELECT r.id as id,p.id as patient_id,d.id as dept_id,"
+                        +"r.reg_time as reg_time,r.price as price "
+                        +"FROM reg_record r left join patient p on r.patient_id=p.id "
+                        +"left join dept d on r.dept_id=d.id "
+                        +"WHERE 1=1 ";
+            if(id!=null) {
+                sql+=" and id="+id;
             }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
+            if(patient_id!=null) {
+                sql+=" and patient_id="+patient_id;
+            }
+            if(dept_id!=null) {
+                sql+=" and dept_id="+dept_id;
+            }
+            if(reg_time!=null) {
+                sql+=" and reg_time="+reg_time;
+            }
+            reglist = execute(sql);
+            System.out.println("Query complete.");    
+        } catch (Exception e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
         return reglist;
     }
 
-    //getPatientRecord(int patient_id)查询指定病人id的挂号记录
-    public List<RegRecord> getPatientRecord(int patient_id) {
-        //查询指定patient_id的所有挂号记录并返回一个RegRecord集合;
-        List<RegRecord> reglist = new ArrayList<>();
-        RegRecord reg;
-        try {
-            //定义查询语句：
-            final String sql = "SELECT * FROM reg_record WHERE patient_id=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement参数;
-            pst.setInt(1, patient_id);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到reglist集合中;
-            while (rs.next()) {
-                reg = new RegRecord();
-                reg.setId(rs.getInt("id"));
-                reg.setPatienttId(rs.getInt("patient_id"));
-                reg.setDeptId(rs.getInt("dept_id"));
-                reg.setRegTime(rs.getString("reg_time"));
-                reg.setPrice(rs.getDouble("price"));
-                reglist.add(reg);
-            }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-        return reglist;
-    }
-
-    //getDeptRecord(int dept_id)查询指定科室id的数据;
-    public List<RegRecord> getDeptRecord(int dept_id) {
-        //查询指定dept_id的所有挂号记录数据并返回一个RegRecord集合;
-        List<RegRecord> reglist = new ArrayList<>();
-        RegRecord reg;
-        try {
-            //定义查询语句：
-            final String sql = "SELECT * FROM reg_record WHERE dept_id=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement参数;
-            pst.setInt(1, dept_id);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到reglist集合中;
-            while (rs.next()) {
-                reg = new RegRecord();
-                reg.setId(rs.getInt("id"));
-                reg.setPatienttId(rs.getInt("patient_id"));
-                reg.setDeptId(rs.getInt("dept_id"));
-                reg.setRegTime(rs.getString("reg_time"));
-                reg.setPrice(rs.getDouble("price"));
-                reglist.add(reg);
-            }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-        return reglist;
-    }
 }
