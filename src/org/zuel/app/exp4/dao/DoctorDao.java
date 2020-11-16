@@ -152,104 +152,60 @@ public class DoctorDao {
         }
     }
 
-    //getDoctor()查询所有doctor数据;
-    public List<Doctor> getDoctor() {
-        //查询doctor表所有数据并返回一个Doctor集合;
+    //execute()用于执行查询的sql语句;
+    private List<Doctor> execute(String sql) throws SQLException {
         List<Doctor> doctorlist = new ArrayList<>();
         Doctor doctor;
-        try {
-            //定义查询语句：
-            final String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
-                              +"t.sex as sex,t.password as password FROM doctor t left join dept d "
-                              +"on t.dept_id=d.id";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到doctorlist集合中;
-            while (rs.next()) {
-                doctor = new Doctor();
-                doctor.setId(rs.getInt("id"));
-                doctor.setName(rs.getString("name"));
-                doctor.setDeptId(rs.getInt("dept_id"));
-                doctor.setSex(rs.getInt("sex"));
-                doctor.setPassword(rs.getString("password"));
-                doctorlist.add(doctor);
-            }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-        return doctorlist;
-    }
-
-    //getDoctor(int id)根据id查询doctor数据;
-    public Doctor getDoctor(int id) {
-        //根据id查询doctor表对应数据并返回一个Doctor对象;
-        Doctor doctor = new Doctor();
-        try {
-            //定义查询语句：
-            final String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
-                              +"t.sex as sex,t.password as password FROM doctor t left join dept d "
-                              +"on t.dept_id=d.id "
-                              +"WHERE id=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            //将结果处理为doctor对象;
+        //创建连接、statement和resultset;
+        Connection conn = DbUtil.getConn();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        //将结果集存放到doctorlist集合中;
+        while (rs.next()) {
+            doctor = new Doctor();
             doctor.setId(rs.getInt("id"));
             doctor.setName(rs.getString("name"));
             doctor.setDeptId(rs.getInt("dept_id"));
             doctor.setSex(rs.getInt("sex"));
             doctor.setPassword(rs.getString("password"));
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
+            doctorlist.add(doctor);
         }
-        return doctor;
+        //关闭资源;
+        DbUtil.close(rs, pst, conn);
+        return doctorlist;
     }
 
-    //getDeptDoctor(int dept_id)查询指定科室id的所有doctor数据;
-    public List<Doctor> getDeptDoctor(int dept_id) {
-        //查询指定dept_id的所有doctor数据并返回一个Doctor集合;
+    //getDoctor()查询所有doctor数据;
+    public List<Doctor> getDoctor(Integer id,Integer sex,Integer dept_id,String name,String password) {
+        //查询doctor表所有数据并返回一个Doctor集合;
         List<Doctor> doctorlist = new ArrayList<>();
-        Doctor doctor;
         try {
             //定义查询语句：
-            final String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
+            String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
                               +"t.sex as sex,t.password as password FROM doctor t left join dept d "
-                              +"on t.dept_id=d.id "
-                              +"WHERE　dept_id=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到doctorlist集合中;
-            while (rs.next()) {
-                doctor = new Doctor();
-                doctor.setId(rs.getInt("id"));
-                doctor.setName(rs.getString("name"));
-                doctor.setDeptId(rs.getInt("dept_id"));
-                doctor.setSex(rs.getInt("sex"));
-                doctor.setPassword(rs.getString("password"));
-                doctorlist.add(doctor);
+                              +"on t.dept_id=d.id WHERE 1=1";
+            if(id!=null) {
+                sql+=" and id="+id;
             }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
+            if(sex!=null) {
+                sql+=" and sex="+sex;
+            }
+            if(dept_id!=null) {
+                sql+=" and dept_id="+dept_id;
+            }
+            if(name!=null) {
+                sql+=" and name="+name;
+            }
+            if(password!=null) {
+                sql+=" and password="+password;
+            }
+            doctorlist = execute(sql);
             System.out.println("Query complete.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
         return doctorlist;
     }
+
 }
