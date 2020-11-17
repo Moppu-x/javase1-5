@@ -185,19 +185,19 @@ public class DoctorDao {
                               +"t.sex as sex,t.password as password FROM doctor t left join dept d "
                               +"on t.dept_id=d.id WHERE 1=1";
             if(id!=null) {
-                sql+=" and id="+id;
+                sql+=" and t.id="+id;
             }
             if(sex!=null) {
-                sql+=" and sex="+sex;
+                sql+=" and t.sex="+sex;
             }
             if(dept_id!=null) {
                 sql+=" and dept_id="+dept_id;
             }
             if(name!=null) {
-                sql+=" and name="+name;
+                sql+=" and name= '"+name+"' ";
             }
             if(password!=null) {
-                sql+=" and password="+password;
+                sql+=" and password= '"+password+"' ";
             }
             doctorlist = execute(sql);
             System.out.println("Query complete.");

@@ -56,7 +56,7 @@ public class Patient {
     public void setAll() {
         //获取的输入赋值给属性;
         Scanner input = new Scanner(System.in);
-        System.out.println("Input the attributes of patient");
+        System.out.println("Input the information of patient");
         System.out.print("id: ");
         setId(input.nextInt());
         System.out.print("sex(1 for male,2 for female,0 for unknown): ");
