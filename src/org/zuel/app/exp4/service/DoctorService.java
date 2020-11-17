@@ -41,7 +41,7 @@ public class DoctorService {
         //根据挂号记录的patient_id查询patient并显示信息;
         System.out.println("Patient list: ");
         while (iter.hasNext()) {
-            patient = pDao.getPatient(iter.next().getPatientId());
+            patient = pDao.getPatient(iter.next().getPatientId(), null, null, null, null).get(0);
             System.out.println(patient.toString());
         }
         System.out.println(" ");

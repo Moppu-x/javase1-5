@@ -14,7 +14,7 @@ public class DoctorTest {
         }
         else{
             System.out.println("Failed to login.");
-            
+            System.exit(1);
         }
         List<RegRecord> rList = DoctorService.getRecord(doctor);
         DoctorService.showPatient(rList);

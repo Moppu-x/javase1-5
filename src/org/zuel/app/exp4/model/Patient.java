@@ -59,13 +59,13 @@ public class Patient {
         System.out.println("Input the information of patient");
         System.out.print("id: ");
         setId(input.nextInt());
-        System.out.print("sex(1 for male,2 for female,0 for unknown): ");
+        System.out.print("sex(0 for male,1 for female): ");
         setSex(input.nextInt());
         System.out.print("age: ");
         setAge(input.nextInt());
         System.out.print("name: ");
         setName(input.nextLine());
-        System.out.println("password: ");
+        System.out.print("password: ");
         setPassword(input.nextLine());
         System.out.println("Inputs for patient done.");
         input.close();

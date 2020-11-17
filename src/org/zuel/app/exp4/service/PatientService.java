@@ -1,5 +1,6 @@
 package org.zuel.app.exp4.service;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.zuel.app.exp4.dao.PatientDao;
@@ -29,4 +30,23 @@ public class PatientService {
         System.out.println("Registration complete.");
     } 
 
+    //login()方法用于已有病人登录;
+    public static Patient login(int id,String password) {
+        Patient patient = null;
+        PatientDao pDao = new PatientDao();
+        List<Patient> pList = pDao.getPatient(id, null, null, null, password);
+        if(pList.size()>0){
+            patient = pList.get(0);
+        }
+        return patient;
+    }
+
+    //createPatient()方法用于新建Patient对象并写入数据库;
+    public static Patient createPatient() {
+        Patient patient = new Patient();
+        PatientDao pDao = new PatientDao();
+        patient.setAll();
+        pDao.insertPatient(patient);
+        return patient;
+    }
 }

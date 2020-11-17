@@ -54,7 +54,7 @@ public class Dept {
         setType(input.nextInt());
         System.out.print("name: ");
         setName(input.nextLine());
-        System.out.println("password: ");
+        System.out.print("remark: ");
         setRemark(input.nextLine());
         System.out.println("Inputs for department done.");
         input.close();

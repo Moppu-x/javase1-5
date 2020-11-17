@@ -65,7 +65,7 @@ public class RegRecord {
         setDeptId(input.nextInt());
         System.out.print("registration time(format:YYYY-MM-DD HH:MM:SS): ");
         setRegTime(input.nextLine());
-        System.out.println("price: ");
+        System.out.print("price: ");
         setPrice(input.nextDouble());
         System.out.println("Inputs for registration record done.");
         input.close();

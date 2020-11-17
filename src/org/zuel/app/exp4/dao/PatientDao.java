@@ -126,64 +126,59 @@ public class PatientDao {
         }
     }
 
-    //getPatient()查询所有病人数据;
-    public List<Patient> getPatient() {
-        //查询数据，返回一个Patient集合;
+    //execute()方法用于执行查询的sql语句;
+    private List<Patient> execute(String sql) throws SQLException{
         List<Patient> patientlist = new ArrayList<>();
         Patient patient;
+        //创建连接、statement和resultset;
+        Connection conn = DbUtil.getConn();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        //将结果集存放到patientlist集合中;
+        while (rs.next()) {
+            patient = new Patient();
+            patient.setId(rs.getInt("id"));
+            patient.setName(rs.getString("name"));
+            patient.setSex(rs.getInt("sex"));
+            patient.setAge(rs.getInt("age"));
+            patient.setPassword(rs.getString("password"));
+            patientlist.add(patient);
+        }
+        //关闭资源;
+        DbUtil.close(rs, pst, conn);
+        return patientlist;
+    }
+
+    //getPatient()查询病人数据;
+    public List<Patient> getPatient(Integer id,String name,Integer sex,Integer age,String password ) {
+        //查询数据，返回一个Patient集合;
+        List<Patient> patientlist = new ArrayList<>();
         try {
             //定义查询语句：
-            final String sql = "SELECT * FROM patient";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            //将结果集存放到patientlist集合中;
-            while (rs.next()) {
-                patient = new Patient();
-                patient.setId(rs.getInt("id"));
-                patient.setName(rs.getString("name"));
-                patient.setSex(rs.getInt("sex"));
-                patient.setAge(rs.getInt("age"));
-                patient.setPassword(rs.getString("password"));
-                patientlist.add(patient);
+            String sql = "SELECT * FROM patient WHERE 1";
+            if(id!=null){
+                sql+=" and id="+id;
             }
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
+            if(name!=null){
+                sql+=" and name="+name;
+            }
+            if(sex!=null){
+                sql+=" and sex="+sex;
+            }
+            if(age!=null){
+                sql+=" and age="+age;
+            }
+            if(password!=null){
+                sql+=" and password="+password;
+            }
+            patientlist = execute(sql);
             System.out.println("Query complete.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
         return patientlist;
     }
 
-    //getPatient(int id)查询指定id的病人数据;
-    public Patient getPatient(int id) {
-        //查询数据并返回一个Patient对象;
-        Patient patient = new Patient();
-        try {
-            //定义查询语句：
-            final String sql = "SELECT * FROM patient WHERE id=?";
-            //创建连接、statement和resultset;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            //将结果处理为patient对象;
-            patient.setId(rs.getInt("id"));
-            patient.setName(rs.getString("name"));
-            patient.setSex(rs.getInt("sex"));
-            patient.setAge(rs.getInt("age"));
-            patient.setPassword(rs.getString("password"));
-            //关闭资源;
-            DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-        return patient;
-    }
+
 }
