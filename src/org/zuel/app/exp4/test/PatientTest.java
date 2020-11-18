@@ -1,12 +1,13 @@
 package org.zuel.app.exp4.test;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 import org.zuel.app.exp4.model.Patient;
 import org.zuel.app.exp4.service.PatientService;
 
 public class PatientTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         //挂号;
         Patient patient = new Patient();
         Scanner input = new Scanner(System.in);
@@ -18,17 +19,17 @@ public class PatientTest {
                 int id = input.nextInt();
                 System.out.print("password: ");
                 String password = input.nextLine();
-                input.close();
                 patient = PatientService.login(id, password);
                 break;
             case 1:
-                patient = PatientService.createPatient();
+                patient = PatientService.createPatient(input);
                 break;
             default:
                 System.out.println("Input error!");
                 System.exit(1);
                 break;
         }
-        PatientService.register(patient);
+        PatientService.register(patient,input);
+        input.close();
     }
 }

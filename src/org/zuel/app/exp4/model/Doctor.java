@@ -53,8 +53,7 @@ public class Doctor {
     }
 
     //setAll()方法获取输入并赋值给各属性;
-    public void setAll() {
-        Scanner input = new Scanner(System.in);
+    public void setAll(Scanner input) {
         System.out.println("Input the attributes of doctor");
         System.out.print("id: ");
         setId(input.nextInt());
@@ -63,11 +62,10 @@ public class Doctor {
         System.out.print("department id: ");
         setDeptId(input.nextInt());
         System.out.print("name: ");
-        setName(input.nextLine());
+        setName(input.next());
         System.out.print("password: ");
-        setPassword(input.nextLine());
+        setPassword(input.next());
         System.out.println("Inputs for doctor done.");
-        input.close();
     }
 
     //重写toString()方法;

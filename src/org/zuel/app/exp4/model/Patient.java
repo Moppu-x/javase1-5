@@ -53,22 +53,20 @@ public class Patient {
     }
 
     //setAll()方法设置所有属性;
-    public void setAll() {
+    public void setAll(Scanner input) {
         //获取的输入赋值给属性;
-        Scanner input = new Scanner(System.in);
         System.out.println("Input the information of patient");
         System.out.print("id: ");
         setId(input.nextInt());
+        System.out.print("name: ");
+        setName(input.next());
         System.out.print("sex(0 for male,1 for female): ");
         setSex(input.nextInt());
         System.out.print("age: ");
         setAge(input.nextInt());
-        System.out.print("name: ");
-        setName(input.nextLine());
         System.out.print("password: ");
-        setPassword(input.nextLine());
+        setPassword(input.next());
         System.out.println("Inputs for patient done.");
-        input.close();
     }
 
     //重写toString()方法;

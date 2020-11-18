@@ -45,19 +45,17 @@ public class Dept {
     }
 
     //setAll()方法获取输入并赋值给各个属性;
-    public void setAll() {
-        Scanner input = new Scanner(System.in);
+    public void setAll(Scanner input) {
         System.out.println("Input the attributes of department");
         System.out.print("id: ");
         setId(input.nextInt());
         System.out.print("type: ");
         setType(input.nextInt());
         System.out.print("name: ");
-        setName(input.nextLine());
+        setName(input.next());
         System.out.print("remark: ");
-        setRemark(input.nextLine());
+        setRemark(input.next());
         System.out.println("Inputs for department done.");
-        input.close();
     }
 
     //重写toString()方法;

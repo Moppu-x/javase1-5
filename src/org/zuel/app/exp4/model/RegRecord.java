@@ -1,18 +1,25 @@
 package org.zuel.app.exp4.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class RegRecord {
-    //挂号记录类;
-    //属性;
+    // 挂号记录类;
+    // 属性;
     private int id;
     private int patient_id;
     private int dept_id;
-    private String reg_time;
+    private Date reg_time;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    // private String reg_time;
     private double price;
 
-    public RegRecord() {}
-    public RegRecord(int id,int patient_id,int dept_id,String reg_time,double price) {
+    public RegRecord() {
+    }
+
+    public RegRecord(int id, int patient_id, int dept_id, Date reg_time, double price) throws ParseException {
         this.id = id;
         this.patient_id = patient_id;
         this.dept_id = dept_id;
@@ -39,11 +46,11 @@ public class RegRecord {
     public void setDeptId(int dept_id) {
         this.dept_id = dept_id;
     }
-    public String getRegTime() {
+    public Date getRegTime() {
         return reg_time;
     }
-    public void setRegTime(String reg_time) {
-        this.reg_time = reg_time;
+    public void setRegTime(String string) throws ParseException {
+        this.reg_time = format.parse(string);
     }
     public double getPrice() {
         return this.price;
@@ -53,9 +60,8 @@ public class RegRecord {
     }
 
     //setAll()方法设置所有属性;
-    public void setAll() {
+    public void setAll(Scanner input) throws ParseException {
         //获取输入并赋值;
-        Scanner input = new Scanner(System.in);
         System.out.println("Input the attributes of registration record");
         System.out.print("id: ");
         setId(input.nextInt());
@@ -68,7 +74,6 @@ public class RegRecord {
         System.out.print("price: ");
         setPrice(input.nextDouble());
         System.out.println("Inputs for registration record done.");
-        input.close();
     }
 
     //重写toString()方法;

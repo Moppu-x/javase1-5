@@ -1,5 +1,6 @@
 package org.zuel.app.exp4.test;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.zuel.app.exp4.model.Doctor;
@@ -7,7 +8,7 @@ import org.zuel.app.exp4.model.RegRecord;
 import org.zuel.app.exp4.service.DoctorService;
 
 public class DoctorTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Doctor doctor = DoctorService.login(1, "danny");
         if (doctor!=null) {
             System.out.println("Successfully login.");

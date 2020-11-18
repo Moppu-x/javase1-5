@@ -1,9 +1,11 @@
 package org.zuel.app.exp4.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,60 +13,59 @@ import org.zuel.app.exp4.model.RegRecord;
 import org.zuel.app.myutils.DbUtil;
 
 public class RegRecordDao {
-    //RegRecordDao实现对reg_record表的操作;
-    //insertRegRecord()增加数据;
-    public void insertRegRecord(int id,int patient_id,int dept_id,String reg_time,double price) {
-        //reg_time格式为YYYY-MM-DD HH:MM:SS;
+    // RegRecordDao实现对reg_record表的操作;
+    // insertRegRecord()增加数据;
+    public void insertRegRecord(int id, int patient_id, int dept_id, String reg_time, double price) {
+        // reg_time格式为YYYY-MM-DD HH:MM:SS;
         try {
-            //定义插入数据的sql语句;
+            // 定义插入数据的sql语句;
             final String sql = "INSERT INTO reg_record VALUES(?,?,?,?,?)";
-            //创建connection和statement;
+            // 创建connection和statement;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
+            // 设置preparedstatement的参数;
             pst.setInt(1, id);
             pst.setInt(2, patient_id);
             pst.setInt(3, dept_id);
             pst.setString(4, reg_time);
             pst.setDouble(5, price);
-            //执行语句;
+            // 执行语句;
             int rs = pst.executeUpdate();
-            if(rs>0){
+            if (rs > 0) {
                 System.out.println("Insertion complete.");
-            }
-            else{
+            } else {
                 System.out.println("Insertion failed.");
             }
-            //关闭连接和statement;
+            // 关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
     }
+
     public void insertRegRecord(RegRecord reg) {
-        //根据对象插入数据;
+        // 根据对象插入数据;
         try {
-            //定义插入数据的sql语句;
+            // 定义插入数据的sql语句;
             final String sql = "INSERT INTO reg_record VALUES(?,?,?,?,?)";
-            //创建connection和statement;
+            // 创建connection和statement;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
+            // 设置preparedstatement的参数;
             pst.setInt(1, reg.getId());
             pst.setInt(2, reg.getPatientId());
             pst.setInt(3, reg.getDeptId());
-            pst.setString(4, reg.getRegTime());
+            pst.setDate(4, (Date) reg.getRegTime());
             pst.setDouble(5, reg.getPrice());
-            //执行语句;
+            // 执行语句;
             int rs = pst.executeUpdate();
-            if(rs>0){
+            if (rs > 0) {
                 System.out.println("Insertion complete.");
-            }
-            else{
+            } else {
                 System.out.println("Insertion failed.");
             }
-            //关闭连接和statement;
+            // 关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
@@ -72,26 +73,25 @@ public class RegRecordDao {
         }
     }
 
-    //deleteRegRecord()删除数据;
+    // deleteRegRecord()删除数据;
     public void deleteRegRecord(int id) {
-        //根据id删除挂号记录;
+        // 根据id删除挂号记录;
         try {
-            //定义删除数据的sql语句;
+            // 定义删除数据的sql语句;
             final String sql = "DELETE FROM reg_record WHERE id=?";
-            //创建connection和statement;
+            // 创建connection和statement;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
+            // 设置preparedstatement的参数;
             pst.setInt(1, id);
-            //执行语句;
+            // 执行语句;
             int rs = pst.executeUpdate();
-            if(rs>0){
+            if (rs > 0) {
                 System.out.println("Deletion complete.");
-            }
-            else{
+            } else {
                 System.out.println("Deletion failed.");
             }
-            //关闭连接和statement;
+            // 关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
@@ -99,53 +99,26 @@ public class RegRecordDao {
         }
     }
 
-    //updateRegrecord()修改数据;
+    // updateRegrecord()修改数据;
     public void updateRegRecord(int id, double price) {
-        //根据挂号记录id修改price;
+        // 根据挂号记录id修改price;
         try {
-            //定义修改数据的sql语句;
+            // 定义修改数据的sql语句;
             final String sql = "UPDATE reg_record SET price=? WHERE id=?";
-            //创建connection和statement;
+            // 创建connection和statement;
             Connection conn = DbUtil.getConn();
             PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
+            // 设置preparedstatement的参数;
             pst.setDouble(1, price);
             pst.setInt(2, id);
-            //执行语句;
+            // 执行语句;
             int rs = pst.executeUpdate();
-            if(rs>0){
+            if (rs > 0) {
                 System.out.println("Update complete.");
-            }
-            else{
+            } else {
                 System.out.println("Update failed.");
             }
-            //关闭连接和statement;
-            DbUtil.close(pst, conn);
-        } catch (SQLException e) {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-    }
-    public void updateRegRecord(int id, int dept_id) {
-        //overload:根据挂号记录id修改科室id;
-        try {
-            //定义修改数据的sql语句;
-            final String sql = "UPDATE reg_record SET dept_id=? WHERE id=?";
-            //创建connection和statement;
-            Connection conn = DbUtil.getConn();
-            PreparedStatement pst = conn.prepareStatement(sql);
-            //设置preparedstatement的参数;
-            pst.setInt(1, dept_id);
-            pst.setInt(2, id);
-            //执行语句;
-            int rs = pst.executeUpdate();
-            if(rs>0){
-                System.out.println("Update complete.");
-            }
-            else{
-                System.out.println("Update failed.");
-            }
-            //关闭连接和statement;
+            // 关闭连接和statement;
             DbUtil.close(pst, conn);
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
@@ -153,8 +126,34 @@ public class RegRecordDao {
         }
     }
 
-    //execute()方法用于执行查询的sql语句;
-    public List<RegRecord> execute(String sql) throws SQLException {
+    public void updateRegRecord(int id, int dept_id) {
+        // overload:根据挂号记录id修改科室id;
+        try {
+            // 定义修改数据的sql语句;
+            final String sql = "UPDATE reg_record SET dept_id=? WHERE id=?";
+            // 创建connection和statement;
+            Connection conn = DbUtil.getConn();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            // 设置preparedstatement的参数;
+            pst.setInt(1, dept_id);
+            pst.setInt(2, id);
+            // 执行语句;
+            int rs = pst.executeUpdate();
+            if (rs > 0) {
+                System.out.println("Update complete.");
+            } else {
+                System.out.println("Update failed.");
+            }
+            // 关闭连接和statement;
+            DbUtil.close(pst, conn);
+        } catch (SQLException e) {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        }
+    }
+
+    // execute()方法用于执行查询的sql语句;
+    public List<RegRecord> execute(String sql) throws SQLException, ParseException {
         List<RegRecord> reglist = new ArrayList<>();
         RegRecord reg;
         //创建连接、statement和resultset;
