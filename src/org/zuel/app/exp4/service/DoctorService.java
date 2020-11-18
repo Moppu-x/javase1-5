@@ -55,7 +55,7 @@ public class DoctorService {
         System.out.println("Registration records in "+time+": ");
         while (iter.hasNext()) {
             record=iter.next();
-            if (record.getRegTime()==time) {
+            if (record.getRegTime().substring(0, 10).equals(time)) {
                 System.out.println(record.toString());
             }
         }
