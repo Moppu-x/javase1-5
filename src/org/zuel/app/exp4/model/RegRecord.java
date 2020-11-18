@@ -7,18 +7,14 @@ import java.util.Scanner;
 
 public class RegRecord {
     // 挂号记录类;
-    // 属性;
     private int id;
     private int patient_id;
     private int dept_id;
     private Date reg_time;
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    // private String reg_time;
     private double price;
 
-    public RegRecord() {
-    }
-
+    public RegRecord() {}
     public RegRecord(int id, int patient_id, int dept_id, Date reg_time, double price) throws ParseException {
         this.id = id;
         this.patient_id = patient_id;
@@ -26,8 +22,8 @@ public class RegRecord {
         this.reg_time = reg_time;
         this.price = price;
     }
-
-    ////各个属性的getter和setter方法;
+    
+    //各个属性的getter和setter方法;
     public int getId() {
         return id;
     }

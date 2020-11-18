@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class Doctor {
     //医生类;
-    //属性;
     private int id;
-    private int sex;        //0表示未知,1表示男，2表示女;
+    private int sex;        //0表示男，1表示女;
     private int dept_id;
     private String name;
     private String password;

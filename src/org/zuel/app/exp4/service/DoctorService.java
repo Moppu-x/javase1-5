@@ -1,6 +1,5 @@
 package org.zuel.app.exp4.service;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +48,7 @@ public class DoctorService {
     }
 
     // 挂号记录集合中对指定时间的记录进行统计;
-    public static void limitTime(List<RegRecord> rList, String time) throws ParseException {
+    public static void limitTime(List<RegRecord> rList, String time) {
         Iterator<RegRecord> iter = rList.iterator();
         RegRecord record;
         System.out.println("Registration records in "+time+": ");

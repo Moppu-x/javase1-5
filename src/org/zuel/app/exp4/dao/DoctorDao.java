@@ -182,8 +182,8 @@ public class DoctorDao {
         try {
             //定义查询语句：
             String sql = "SELECT t.id as id,t.name as name,d.id as dept_id,"
-                              +"t.sex as sex,t.password as password FROM doctor t left join dept d "
-                              +"on t.dept_id=d.id WHERE 1=1";
+                        +"t.sex as sex,t.password as password FROM doctor t left join dept d "
+                        +"on t.dept_id=d.id WHERE 1=1";
             if(id!=null) {
                 sql+=" and t.id="+id;
             }

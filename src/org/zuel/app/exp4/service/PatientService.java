@@ -1,8 +1,8 @@
 package org.zuel.app.exp4.service;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
+import java.text.ParseException;
 
 import org.zuel.app.exp4.dao.PatientDao;
 import org.zuel.app.exp4.dao.RegRecordDao;
