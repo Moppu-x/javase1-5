@@ -1,7 +1,6 @@
 package org.zuel.app.exp4.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -51,13 +50,12 @@ public class DoctorService {
 
     // 挂号记录集合中对指定时间的记录进行统计;
     public static void limitTime(List<RegRecord> rList, String time) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Iterator<RegRecord> iter = rList.iterator();
         RegRecord record;
         System.out.println("Registration records in "+time+": ");
         while (iter.hasNext()) {
             record=iter.next();
-            if (record.getRegTime()==format.parse(time)) {
+            if (record.getRegTime()==time) {
                 System.out.println(record.toString());
             }
         }

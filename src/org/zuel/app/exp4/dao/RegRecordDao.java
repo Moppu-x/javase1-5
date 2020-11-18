@@ -1,7 +1,6 @@
 package org.zuel.app.exp4.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +15,7 @@ public class RegRecordDao {
     // RegRecordDao实现对reg_record表的操作;
     // insertRegRecord()增加数据;
     public void insertRegRecord(int id, int patient_id, int dept_id, String reg_time, double price) {
-        // reg_time格式为YYYY-MM-DD HH:MM:SS;
+        // reg_time格式为yyyy-MM-dd hh:mm:ss;
         try {
             // 定义插入数据的sql语句;
             final String sql = "INSERT INTO reg_record VALUES(?,?,?,?,?)";
@@ -56,7 +55,7 @@ public class RegRecordDao {
             pst.setInt(1, reg.getId());
             pst.setInt(2, reg.getPatientId());
             pst.setInt(3, reg.getDeptId());
-            pst.setDate(4, (Date) reg.getRegTime());
+            pst.setString(4, reg.getRegTime());
             pst.setDouble(5, reg.getPrice());
             // 执行语句;
             int rs = pst.executeUpdate();
@@ -196,7 +195,7 @@ public class RegRecordDao {
                 sql+=" and dept_id="+dept_id;
             }
             if(reg_time!=null) {
-                sql+=" and reg_time="+reg_time;
+                sql+=" and reg_time= '"+reg_time+"'";
             }
             reglist = execute(sql);
             System.out.println("Query complete.");    

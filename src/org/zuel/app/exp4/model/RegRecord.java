@@ -46,8 +46,8 @@ public class RegRecord {
     public void setDeptId(int dept_id) {
         this.dept_id = dept_id;
     }
-    public Date getRegTime() {
-        return reg_time;
+    public String getRegTime() {
+        return format.format(reg_time);
     }
     public void setRegTime(String string) throws ParseException {
         this.reg_time = format.parse(string);
@@ -69,8 +69,10 @@ public class RegRecord {
         setPatientId(input.nextInt());
         System.out.print("department id: ");
         setDeptId(input.nextInt());
-        System.out.print("registration time(format:YYYY-MM-DD HH:MM:SS): ");
+        input.nextLine();
+        System.out.print("registration time(format:yyyy-MM-dd hh:mm:ss): ");
         setRegTime(input.nextLine());
+        input.nextLine();
         System.out.print("price: ");
         setPrice(input.nextDouble());
         System.out.println("Inputs for registration record done.");
@@ -79,6 +81,6 @@ public class RegRecord {
     //重写toString()方法;
     public String toString() {
         return "Registration Record: id: "+id+" patient id: "+patient_id+" department id: "+dept_id
-                +" registration time: "+reg_time+" price: "+price;
+                +" registration time: "+format.format(reg_time)+" price: "+price;
     }
 }

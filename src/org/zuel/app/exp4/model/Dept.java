@@ -54,7 +54,7 @@ public class Dept {
         System.out.print("name: ");
         setName(input.next());
         System.out.print("remark: ");
-        setRemark(input.next());
+        setRemark(input.nextLine());
         System.out.println("Inputs for department done.");
     }
 

@@ -57,7 +57,7 @@ public class Doctor {
         System.out.println("Input the attributes of doctor");
         System.out.print("id: ");
         setId(input.nextInt());
-        System.out.print("sex(0 for male,1 for female): ");
+        System.out.print("sex(0 for male, 1 for female): ");
         setSex(input.nextInt());
         System.out.print("department id: ");
         setDeptId(input.nextInt());

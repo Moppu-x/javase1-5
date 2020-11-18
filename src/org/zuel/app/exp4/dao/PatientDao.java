@@ -155,12 +155,12 @@ public class PatientDao {
         List<Patient> patientlist = new ArrayList<>();
         try {
             //定义查询语句：
-            String sql = "SELECT * FROM patient WHERE 1";
+            String sql = "SELECT * FROM patient WHERE 1=1";
             if(id!=null){
                 sql+=" and id="+id;
             }
             if(name!=null){
-                sql+=" and name="+name;
+                sql+=" and name= '"+name+"'";
             }
             if(sex!=null){
                 sql+=" and sex="+sex;
@@ -169,7 +169,7 @@ public class PatientDao {
                 sql+=" and age="+age;
             }
             if(password!=null){
-                sql+=" and password="+password;
+                sql+=" and password= '"+password+"' ";
             }
             patientlist = execute(sql);
             System.out.println("Query complete.");

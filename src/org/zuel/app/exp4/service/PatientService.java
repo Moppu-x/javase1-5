@@ -17,8 +17,9 @@ public class PatientService {
         record.setPatientId(patient.getId());
         System.out.print("department id: ");
         record.setDeptId(in.nextInt());
+        in.nextLine();
         System.out.print("registration time(format:yyyy-MM-dd hh:mm:ss): ");
-        record.setRegTime(in.next());
+        record.setRegTime(in.nextLine());
         System.out.println("price: ");
         record.setPrice(in.nextDouble());
         //向reg_record表写入新数据;
@@ -34,6 +35,7 @@ public class PatientService {
         if(pList.size()>0){
             patient = pList.get(0);
         }
+        System.out.println("Successfully login.");
         return patient;
     }
 

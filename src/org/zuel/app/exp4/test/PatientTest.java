@@ -18,7 +18,7 @@ public class PatientTest {
                 System.out.print("id: ");
                 int id = input.nextInt();
                 System.out.print("password: ");
-                String password = input.nextLine();
+                String password = input.next();
                 patient = PatientService.login(id, password);
                 break;
             case 1:

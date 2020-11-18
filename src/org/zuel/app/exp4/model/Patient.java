@@ -60,7 +60,7 @@ public class Patient {
         setId(input.nextInt());
         System.out.print("name: ");
         setName(input.next());
-        System.out.print("sex(0 for male,1 for female): ");
+        System.out.print("sex(0 for male, 1 for female): ");
         setSex(input.nextInt());
         System.out.print("age: ");
         setAge(input.nextInt());
