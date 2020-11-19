@@ -11,5 +11,6 @@ public class RegTest {
         Patient p = new Patient();
         p.setAll(input);
         System.out.println(p.toString());
+        input.close();
     }
 }

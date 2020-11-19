@@ -172,13 +172,11 @@ public class PatientDao {
                 sql+=" and password= '"+password+"' ";
             }
             patientlist = execute(sql);
-            System.out.println("Query complete.");
         } catch (Exception e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
         }
         return patientlist;
     }
-
 
 }
