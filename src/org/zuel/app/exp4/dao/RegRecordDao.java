@@ -14,8 +14,8 @@ import org.zuel.app.myutils.DbUtil;
 public class RegRecordDao {
     // RegRecordDao实现对reg_record表的操作;
     // insertRegRecord()增加数据;
-    public void insertRegRecord(int id, int patient_id, int dept_id, String reg_time, double price) {
-        // reg_time格式为yyyy-MM-dd hh:mm:ss;
+    public static void insertRegRecord(int id, int patient_id, int dept_id, String reg_time, double price) {
+        // reg_time格式为yyyy-MM-dd HH:mm:ss;
         try {
             // 定义插入数据的sql语句;
             final String sql = "INSERT INTO reg_record VALUES(?,?,?,?,?)";
@@ -43,7 +43,7 @@ public class RegRecordDao {
         }
     }
 
-    public void insertRegRecord(RegRecord reg) {
+    public static void insertRegRecord(RegRecord reg) {
         // 根据对象插入数据;
         try {
             // 定义插入数据的sql语句;
@@ -73,7 +73,7 @@ public class RegRecordDao {
     }
 
     // deleteRegRecord()删除数据;
-    public void deleteRegRecord(int id) {
+    public static void deleteRegRecord(int id) {
         // 根据id删除挂号记录;
         try {
             // 定义删除数据的sql语句;
@@ -99,7 +99,7 @@ public class RegRecordDao {
     }
 
     // updateRegrecord()修改数据;
-    public void updateRegRecord(int id, double price) {
+    public static void updateRegRecord(int id, double price) {
         // 根据挂号记录id修改price;
         try {
             // 定义修改数据的sql语句;
@@ -125,7 +125,7 @@ public class RegRecordDao {
         }
     }
 
-    public void updateRegRecord(int id, int dept_id) {
+    public static void updateRegRecord(int id, int dept_id) {
         // overload:根据挂号记录id修改科室id;
         try {
             // 定义修改数据的sql语句;
@@ -152,7 +152,7 @@ public class RegRecordDao {
     }
 
     // execute()方法用于执行查询的sql语句;
-    public List<RegRecord> execute(String sql) throws SQLException, ParseException {
+    public static List<RegRecord> execute(String sql) throws SQLException, ParseException {
         List<RegRecord> reglist = new ArrayList<>();
         RegRecord reg;
         //创建连接、statement和resultset;
@@ -175,7 +175,7 @@ public class RegRecordDao {
     }
 
     //getRegRecord()查询所有挂号记录;
-    public List<RegRecord> getRegRecord(Integer id,Integer patient_id,Integer dept_id,String reg_time) {
+    public static List<RegRecord> getRegRecord(Integer id,Integer patient_id,Integer dept_id,String reg_time) {
         //查询所有挂号记录并返回一个RegRecord集合;
         List<RegRecord> reglist = new ArrayList<>();
         try {
@@ -197,8 +197,7 @@ public class RegRecordDao {
             if(reg_time!=null) {
                 sql+=" and reg_time= '"+reg_time+"'";
             }
-            reglist = execute(sql);
-            System.out.println("Query complete.");    
+            reglist = execute(sql);  
         } catch (Exception e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();

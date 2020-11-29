@@ -13,7 +13,7 @@ import org.zuel.app.myutils.DbUtil;
 public class PatientDao {
     //PatientDao实现对数据表patient的增删改查;
     //insertPatient()增加数据;
-    public void insertPatient(int id,String name,int sex,int age,String password) {
+    public static void insertPatient(int id,String name,int sex,int age,String password) {
         try {
             //定义插入数据的sql语句;
             final String sql = "INSERT INTO patient VALUES(?,?,?,?,?)";
@@ -41,7 +41,7 @@ public class PatientDao {
             e.printStackTrace();
         }
     }
-    public void insertPatient(Patient patient) {
+    public static void insertPatient(Patient patient) {
         //根据对象将记录插入数据表;
         try {
             //定义插入数据的sql语句;
@@ -72,7 +72,7 @@ public class PatientDao {
     }
 
     //deletePatient()删除数据;
-    public void deletePatient(int id) {
+    public static void deletePatient(int id) {
         //根据id删除数据表中对应的记录;
         try {
             //定义删除数据的sql语句;
@@ -99,7 +99,7 @@ public class PatientDao {
     }
 
     //updatePatient()修改password;
-    public void updatePatient(int id,String password) {
+    public static void updatePatient(int id,String password) {
         //根据id修改password;
         try {
             //定义修改数据的sql语句;
@@ -127,7 +127,7 @@ public class PatientDao {
     }
 
     //execute()方法用于执行查询的sql语句;
-    private List<Patient> execute(String sql) throws SQLException{
+    private static List<Patient> execute(String sql) throws SQLException{
         List<Patient> patientlist = new ArrayList<>();
         Patient patient;
         //创建连接、statement和resultset;
@@ -150,7 +150,7 @@ public class PatientDao {
     }
 
     //getPatient()查询病人数据;
-    public List<Patient> getPatient(Integer id,String name,Integer sex,Integer age,String password ) {
+    public static List<Patient> getPatient(Integer id,String name,Integer sex,Integer age,String password ) {
         //查询数据，返回一个Patient集合;
         List<Patient> patientlist = new ArrayList<>();
         try {

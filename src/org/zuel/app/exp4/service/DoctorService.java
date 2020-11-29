@@ -1,8 +1,10 @@
 package org.zuel.app.exp4.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.zuel.app.exp4.dao.DoctorDao;
 import org.zuel.app.exp4.dao.PatientDao;
@@ -15,36 +17,37 @@ public class DoctorService {
     // login()方法用于医生登录(获取对应数据);
     public static Doctor login(int id, String password) {
         Doctor doctor = null;
-        DoctorDao dDao = new DoctorDao();
         // doctor表中查询对应id和password的doctor数据;
-        List<Doctor> dl = dDao.getDoctor(id, null, null, null, password);
-        if (dl.size() > 0) {
-            doctor = dl.get(0);
+        List<Doctor> dlist = DoctorDao.getDoctor(id, null, null, null, password);
+        if (dlist.size() > 0) {
+            doctor = dlist.get(0);
         }
         return doctor;
     }
 
     // getRecord()查询挂号记录;
     public static List<RegRecord> getRecord(Doctor doctor) {
-        List<RegRecord> rl = new ArrayList<>();
-        RegRecordDao rDao = new RegRecordDao();
+        List<RegRecord> rlist = new ArrayList<>();
         // 获取doctor的dept_id对应的挂号记录;
-        rl = rDao.getRegRecord(null, null, doctor.getDeptId(), null);
-        return rl;
+        rlist = RegRecordDao.getRegRecord(null, null, doctor.getDeptId(), null);
+        return rlist;
     }
 
     // showPatient()方法显示病人列表;
     public static void showPatient(List<RegRecord> rList) {
         Patient patient;
-        PatientDao pDao = new PatientDao();
         Iterator<RegRecord> iter = rList.iterator();
-        // 根据挂号记录的patient_id查询patient并显示信息;
-        System.out.println("Patient list: ");
+        // 根据挂号记录的patient_id查询patient,并存放到map中
+        Map<Integer,Patient> map = new HashMap<>();
         while (iter.hasNext()) {
-            patient = pDao.getPatient(iter.next().getPatientId(), null, null, null, null).get(0);
-            System.out.println(patient.toString());
+            patient = PatientDao.getPatient(iter.next().getPatientId(), null, null, null, null).get(0);
+            map.put(patient.getId(), patient);
         }
-        System.out.println(" ");
+        //输出病人列表
+        for(Integer key : map.keySet()) {
+            System.out.println(map.get(key).toString());
+        }
+        System.out.println();
     }
 
     // 挂号记录集合中对指定时间的记录进行统计;
@@ -58,6 +61,6 @@ public class DoctorService {
                 System.out.println(record.toString());
             }
         }
-        System.out.println(" ");
+        System.out.println();
     }
 }

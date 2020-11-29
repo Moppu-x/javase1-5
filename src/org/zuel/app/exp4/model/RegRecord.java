@@ -11,7 +11,7 @@ public class RegRecord {
     private int patient_id;
     private int dept_id;
     private Date reg_time;
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private double price;
 
     public RegRecord() {}
@@ -47,6 +47,9 @@ public class RegRecord {
     }
     public void setRegTime(String string) throws ParseException {
         this.reg_time = format.parse(string);
+    }
+    public void setRegTime(Date date) {
+        this.reg_time = date;
     }
     public double getPrice() {
         return this.price;

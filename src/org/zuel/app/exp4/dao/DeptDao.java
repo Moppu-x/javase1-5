@@ -13,7 +13,7 @@ import org.zuel.app.myutils.DbUtil;
 public class DeptDao {
     //DeptDao实现对数据表dept的增删改查;
     //insertDept()方法实现数据的增加;
-    public void insertDept(int id,String name,int type,String remark) {
+    public static void insertDept(int id,String name,int type,String remark) {
         try {
             //定义插入数据的sql语句;
             final String sql = "INSERT INTO dept VALUES(?,?,?,?)";
@@ -40,7 +40,7 @@ public class DeptDao {
             e.printStackTrace();
         }
     }
-    public void insertDept(Dept dept) {
+    public static void insertDept(Dept dept) {
         //根据对象插入数据;
         try {
             //定义插入数据的sql语句;
@@ -70,7 +70,7 @@ public class DeptDao {
     }
 
     //deleteDept()方法实现数据的删除;
-    public void deleteDept(int id) {
+    public static void deleteDept(int id) {
         //根据id删除数据表中对应的记录;
         try {
             //定义删除数据的sql语句;
@@ -97,7 +97,7 @@ public class DeptDao {
     }
 
     //updateDept()方法实现数据的修改;
-    public void updateDept(int id,String name) {
+    public static void updateDept(int id,String name) {
         //根据id修改name;
         try {
             //定义修改数据的sql语句;
@@ -125,7 +125,7 @@ public class DeptDao {
     }
 
     //getDept()方法实现数据查询;
-    public List<Dept> getDept() {
+    public static List<Dept> getDept() {
         //查询数据，返回一个Dept集合;
         List<Dept> deptlist = new ArrayList<>();
         Dept dept;
@@ -147,7 +147,6 @@ public class DeptDao {
             }
             //关闭资源;
             DbUtil.close(rs, pst, conn);
-            System.out.println("Query complete.");
         } catch (SQLException e) {
             System.out.println("Something went wrong...");
             e.printStackTrace();
