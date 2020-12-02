@@ -30,14 +30,13 @@ public class DbUtil {
 
     //close方法用于关闭资源;
     public static void close(ResultSet rs,PreparedStatement pst,Connection conn) throws SQLException {
-        rs.close();
-        pst.close();
-        conn.close();
+        if(!rs.isClosed()) { rs.close(); }
+        if(!pst.isClosed()) { pst.close(); }
+        if(!conn.isClosed()) { conn.close(); }
     }
     //overload close method;
     public static void close(PreparedStatement pst,Connection conn) throws SQLException {
-        pst.close();
-        conn.close();
+        close(null, pst, conn);
     }
 
 }

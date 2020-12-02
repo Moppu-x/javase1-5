@@ -175,7 +175,7 @@ public class DoctorDao {
         return doctorlist;
     }
 
-    // getDoctor()查询所有doctor数据;
+    // getDoctor()查询doctor数据;
     public static List<Doctor> getDoctor(Integer id, Integer sex, Integer dept_id, String name, String password) {
         // 查询doctor表所有数据并返回一个Doctor集合;
         List<Doctor> doctorlist = new ArrayList<>();

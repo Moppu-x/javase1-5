@@ -28,7 +28,7 @@ public class RegQuery {
         //查询指定病人id的挂号记录并输出;
         rList = RegRecordDao.getRegRecord(null, 9, null, null);
         iter = rList.iterator();
-        System.out.println("Registration records of patient id 3: ");
+        System.out.println("Registration records of patient id 9: ");
         while(iter.hasNext()) {
             System.out.println(iter.next().toString());
         }
@@ -36,7 +36,7 @@ public class RegQuery {
         //查询指定科室id的挂号记录;
         rList = RegRecordDao.getRegRecord(null, null, 6, null);
         iter = rList.iterator();
-        System.out.println("Registration records of department id 2: ");
+        System.out.println("Registration records of department id 6: ");
         while(iter.hasNext()) {
             System.out.println(iter.next().toString());
         }
